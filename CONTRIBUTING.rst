@@ -13,7 +13,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at http://prodweb4/OnlineOrdering/Product?productID=15701
+Report bugs at https://github.com/markliederbach/nm-launch-catalog/issues
 
 If you are reporting a bug, please include:
 
@@ -43,7 +43,7 @@ sharepoints, and such.
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at http://prodweb4/OnlineOrdering/Product?productID=15701.
+The best way to send feedback is to file an issue at https://github.com/markliederbach/nm-launch-catalog/issues.
 
 If you are proposing a feature:
 

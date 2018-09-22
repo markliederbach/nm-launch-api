@@ -1,64 +1,51 @@
-import pprint
-import traceback
-from flask import current_app
-from flask.views import MethodView
-from nm_launch_api.api.v1 import api
-from nm_launch_api.utils.jobs import ExampleWorker  # Import your jobs
-#from nm_launch_api.api.v1.schemas import RealtimeDeviceSchema  # Import your schemas
+import flask
+from flask import current_app, request, views
+from nm_launch_api import exceptions
+from nm_launch_api.clients import get_client
+from nm_launch_api.api.v1 import api, schemas
 
 
-@api.route('/')
-def index():
-    current_app.logger.info("I just used current_app!")
-    return "Hello, World!"
+class LaunchSchedule(views.MethodView):
+    """
+    This class controls the API for sending config update requests down to collectors.
+    """
+
+    def get(self):
+        """
+        Return results from remote API for launch events.
+        Returns:
+            dict: Data to be formatted as JSON
+            int: Status code for the response.
+        """
+        launch_client = get_client("launch_library")
+        params = request.args
+        current_app.logger.info("Processing {} GET request with params: {}".format(self.__class__.__name__, params))
+        try:
+            response_data = launch_client.get_launches(params=params)
+            current_app.logger.info("Returning {} successful response".format(self.__class__.__name__))
+            return flask.jsonify(self.parse_search_response(response_data)), launch_client.requests.codes['ok']
+        except exceptions.ClientException as exc:
+            current_app.logger.exception("View {} failed to complete request".format(self.__class__.__name__))
+            return flask.jsonify({"error": str(exc)}), exc.status_code
+        except Exception as exc:
+            current_app.logger.exception("View {} failed to complete request".format(self.__class__.__name__))
+            return flask.jsonify({"error": str(exc)}), launch_client.requests.codes['internal_server_error']
+
+    def parse_search_response(self, raw_data):
+        """
+        Use ModelSchemas to format and parse the data.
+        Args:
+            raw_data(dict): Raw data from remote resource
+
+        Returns:
+            dict: Parsed data to be returned to the client
+
+        """
+        response_schema = schemas.LaunchInfoSchema(many=True)
+        parsed_data = response_schema.dump(raw_data['launches'])
+        assert not parsed_data.errors
+        raw_data['launches'] = parsed_data.data
+        return raw_data
 
 
-# Example of MethodView (PREFERRED OVER FUNCTION-BASED VIEWS)
-# class RealtimePollingAPI(MethodView):
-#     """
-#     This class controls the API for sending config update requests down to collectors.
-#     """
-#
-#     def post(self):
-#         """POST method handling"""
-#         # Grab raw JSON data
-#         raw_data = flask.request.get_json(force=True)
-#         current_app.logger.debug(
-#             "Received realtime request with JSON data:\n{}".format(
-#                 pprint.pformat(raw_data, indent=2)
-#             )
-#         )
-#         # Initialize Schema used to deserialize JSON data
-#         schema = RealtimeDeviceSchema(many=isinstance(raw_data, list))
-#         # Attempt to load the data into schema
-#         json_data = schema.load(raw_data)
-#         # Schema will have validated the data, check for errors. Return them if found.
-#         if json_data.errors:
-#             return self._request_invalid(json_data)
-#         return self._request_valid(json_data)
-#
-#     def _request_invalid(self, json_data):
-#         """Handle the response for a bad request from the user."""
-#         response_dict = {
-#             'errors': json_data.errors
-#         }
-#         return flask.jsonify(**response_dict), 400  # BAD REQUEST
-#
-#     def _request_valid(self, json_data):
-#         """Handle the response for a good request from the user."""
-#         try:
-#             response_data = RealtimeFlaskPollRequestWorker(json_data.data,
-#                                                            RealtimeGroupManagerRequestSchema,
-#                                                            current_app).do_work()
-#             resp_dict = {
-#                 'result': response_data,
-#             }
-#             code = 200
-#         except Exception as e:
-#             current_app.logger.error("Failed to perform realtime request:\n{}".format(traceback.format_exc()))
-#             resp_dict = {
-#                 'error_message': str(e)
-#             }
-#             code = 500
-#         return flask.jsonify(**resp_dict), code
-# api.add_url_rule('/example', view_func=RealtimePollingAPI.as_view('example_api'))
+api.add_url_rule('/launch', view_func=LaunchSchedule.as_view('launch'))

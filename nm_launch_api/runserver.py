@@ -6,7 +6,7 @@ def main():
         host=app.config['FLASK_HOST'],
         port=app.config['FLASK_PORT'],
         debug=app.config['FLASK_DEBUG'],
-        #use_reloader=False,
+        #use_reloader=True,
     )
     return app
 

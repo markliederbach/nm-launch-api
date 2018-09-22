@@ -5,9 +5,4 @@ Credits
 Development Lead
 ----------------
 
-* Mark Liederbach <usrxxx@tdstelecom.com>
-
-Contributors
-------------
-
-None yet. Why not be the first?
+* Mark Liederbach <contact@markliederbach.com>
