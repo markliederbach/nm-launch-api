@@ -18,10 +18,10 @@ class LaunchSchedule(views.MethodView):
             int: Status code for the response.
         """
         launch_client = get_client("launch_library")
-        params = request.args
+        params = dict(request.args)
         current_app.logger.info("Processing {} GET request with params: {}".format(self.__class__.__name__, params))
         try:
-            response_data = launch_client.get_launches(params=params)
+            response_data = launch_client.get_launches(params=self.parse_query_params(params))
             current_app.logger.info("Returning {} successful response".format(self.__class__.__name__))
             return flask.jsonify(self.parse_search_response(response_data)), launch_client.requests.codes['ok']
         except exceptions.ClientException as exc:
@@ -46,6 +46,18 @@ class LaunchSchedule(views.MethodView):
         assert not parsed_data.errors
         raw_data['launches'] = parsed_data.data
         return raw_data
+
+    def parse_query_params(self, params):
+        """
+        Set defaults for params if they are not provided
+        Args:
+            params(dict): raw params from the frontend.
+
+        Returns:
+            dict: parsed params
+        """
+        params["next"] = params.get("next", 10)
+        return params
 
 
 api.add_url_rule('/launch', view_func=LaunchSchedule.as_view('launch'))

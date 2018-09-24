@@ -44,5 +44,8 @@ class LaunchInfoSchema(Schema):
     missions = fields.Nested(MissionSchema, many=True)
 
     def get_est_timestamp(self, obj):
-        timestamp = datetime.strptime(obj["net"], "%B %d, %Y %H:%M:%S %Z")
-        return timestamp.isoformat()
+        raw_timestamp = obj["net"]
+        if raw_timestamp:
+            timestamp = datetime.strptime(raw_timestamp, "%B %d, %Y %H:%M:%S %Z")
+            return timestamp.isoformat()
+        return None
