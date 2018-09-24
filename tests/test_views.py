@@ -10,6 +10,7 @@ import collections
 from nm_launch_api import app
 from nm_launch_api.api.v1 import views as v1_views
 from tests.mock_clients import launch_library
+from tests import asserts
 
 
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -45,7 +46,7 @@ class TestNMLaunchAPIV1(unittest.TestCase):
         test_profile = "launch_schedule_normal"
         self.app.config["CLIENT_SETTINGS"]["launch_library"]["base_url"] = test_profile
         query_mock_method, request, response = self.wrapped_request(test_profile)
-
+        asserts.LaunchScheduleAssert(self, request, response, query_mock_method, test_profile)
 
 
 if __name__ == "__main__":
