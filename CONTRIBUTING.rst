@@ -69,7 +69,7 @@ Ready to contribute? Here's how to set up nm_launch_api for local development.
 
 4. Create a branch for local development::
 
-    $ git checkout -b feature-name-your-branch
+    $ git checkout -b feature/name-your-branch
 
    Now you can make your changes locally.
 
