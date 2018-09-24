@@ -13,7 +13,7 @@ FLASK_DEBUG = os.environ.get('FLASK_DEBUG', True)
 # Email Settings
 # -----------------------------------------
 RECIPIENT_LIST = (
-    'telecom.ns-oss@tdstelecom.com',
+    'contact@markliederbach.com',
 )
 ERROR_RECIPIENT_LIST = RECIPIENT_LIST
 

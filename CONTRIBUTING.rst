@@ -59,7 +59,7 @@ Ready to contribute? Here's how to set up nm_launch_api for local development.
 
 1. Clone you the project on Gitlab locally::
 
-    $ git clone git@git.ent.tds.net:Some_Group/nm_launch_api.git
+    $ git clone https://github.com/markliederbach/nm-launch-catalog.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
