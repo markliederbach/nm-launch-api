@@ -5,7 +5,6 @@ nm_launch_api
 
 API backend to search launch data to the frontend.
 
-* Free software: ISC license
 
 To Run Locally
 --------------
