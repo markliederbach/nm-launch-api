@@ -2,22 +2,47 @@
 Similar to Serializers in Django, these manage the conversion between
 raw JSON and models. This is where parsing validation should be done.
 """
-from marshmallow import Schema, SchemaOpts, fields, post_load
-from nm_launch_api.api.v1.models import RealtimeDevice  # Import your models
-from nm_launch_api.utils.meta_models import ModelSchema  # Shared class to create ModelSchemas
+from datetime import datetime
+from marshmallow import Schema, fields
 
-# Example:
-# class RealtimeProtocolProfileSchema(ModelSchema):
-#     collector_class = fields.String(required=True)
-#     protocol_profile_data = fields.Dict()
-#
-#     class Meta:
-#         model = ProtocolProfile
-#
-# class RealtimeProfileSchema(ModelSchema):
-#     polling_profile = fields.String(required=True)
-#     protocol_profile = fields.Nested(RealtimeProtocolProfileSchema, required=True)  # Notice the nested schema here
-#     profile_data = fields.Dict()
-#
-#     class Meta:
-#         model = RealtimeProfile
+
+class AgencySchema(Schema):
+    name = fields.String()
+    info_url = fields.String()
+
+    def get_info_url(self, obj):
+        return obj["wikiURL"]
+
+
+class MissionSchema(Schema):
+    name = fields.String()
+    description = fields.String()
+    agencies = fields.Nested(AgencySchema, many=True)
+
+
+class RocketSchema(Schema):
+    name = fields.String()
+    info_url = fields.Method("get_info_url")
+
+    def get_info_url(self, obj):
+        return obj["wikiURL"]
+
+
+class LocationSchema(Schema):
+    name = fields.String()
+    map_url = fields.Method("get_map_url")
+
+    def get_map_url(self, obj):
+        chosen_pad = next(iter(obj["pads"]), None)
+        return chosen_pad["mapURL"] if chosen_pad else None
+
+
+class LaunchInfoSchema(Schema):
+    est_timestamp = fields.Method("get_est_timestamp")
+    location = fields.Nested(LocationSchema)
+    rocket = fields.Nested(RocketSchema)
+    missions = fields.Nested(MissionSchema, many=True)
+
+    def get_est_timestamp(self, obj):
+        timestamp = datetime.strptime(obj["net"], "%B %d, %Y %H:%M:%S %Z")
+        return timestamp.isoformat()

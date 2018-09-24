@@ -1,4 +1,4 @@
-Flask==0.11.1
-PyYAML==3.12
-marshmallow==2.10.4
-#APScheduler==3.3.0
+Flask==1.0.2
+marshmallow==2.15.6
+certifi
+requests

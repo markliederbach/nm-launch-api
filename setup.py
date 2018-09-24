@@ -47,8 +47,8 @@ setup(
     description="API backend to search launch data to the frontend.",
     long_description=readme + '\n\n' + history,
     author="Mark Liederbach",
-    author_email='usrxxx@tdstelecom.com',
-    url='https://tel.intranet.teldta.com/sites/IT_ADMNA/WIKI/',
+    author_email='contact@markliederbach.com',
+    url='https://github.com/markliederbach/nm-launch-catalog',
     packages=[
         'nm_launch_api',
     ],
@@ -82,5 +82,5 @@ setup(
     ],
     test_suite='tests',
     tests_require=test_requirements,
-    cmdclass={'test':PyTest},
+    cmdclass={'test': PyTest},
 )

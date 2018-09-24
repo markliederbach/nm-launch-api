@@ -33,7 +33,7 @@ LOGGING_CONFIG = {
         'standard': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(str(LOG_DIR),"{}.log".format(__name__.split('.')[0])),
+            'filename': os.path.join(str(LOG_DIR), "{}.log".format(__name__.split('.')[0])),
             'formatter': 'verbose',
             'maxBytes': 15000,
             'backupCount': 1
@@ -51,12 +51,12 @@ LOGGING_CONFIG = {
             'mailhost': os.environ.get('EMAIL_SERVER', '127.0.0.1'),
             'fromaddr': '{}@{}'.format(__name__.split('.')[0], socket.getfqdn()),
             'toaddrs': ERROR_RECIPIENT_LIST,
-            'subject': 'CRITICAL ERROR - TDS SNAP Driver',
+            'subject': 'CRITICAL ERROR',
         }
     },
     'loggers': {
         __name__.split('.')[0]: {
-            'handlers': ['standard','console','email'],
+            'handlers': ['standard', 'console', 'email'],
             'level': os.environ.get('LOG_LEVEL', 'INFO')
         }
     }

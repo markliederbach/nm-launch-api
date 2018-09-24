@@ -13,23 +13,23 @@ FLASK_DEBUG = os.environ.get('FLASK_DEBUG', True)
 # Email Settings
 # -----------------------------------------
 RECIPIENT_LIST = (
-    'telecom.ns-oss@tdstelecom.com',
+    'contact@markliederbach.com',
 )
 ERROR_RECIPIENT_LIST = RECIPIENT_LIST
 
-# nm_launch_api Settings
-# ---------------------------------------------------------------
-# Example:
-#SNAP_DRIVER_DISABLE_POLLING = os.environ.get('SNAP_DRIVER_DISABLE_POLLING', False)  # Used for satellite services only used for realtime requests
 
-# TSDB Settings
+#  Client Settings
 # -----------------------------------------
-# TSDB_SETTINGS = {
-#     'BASE_URL': os.environ['TSDB_BASE_URL'],  # Ex: http://chewbacca.tds.local:8080
-#     'USERNAME': os.environ.get('TSDB_USERNAME', None),
-#     'PASSWORD': os.environ.get('TSDB_PASSWORD', None),
-# }
-
+CLIENT_SETTINGS = {
+    'launch_library': {
+        'base_url': os.environ.get('LAUNCH_LIBRARY_BASE_URL'),
+        'username': os.environ.get('LAUNCH_LIBRARY_USERNAME', default=None),
+        'password': os.environ.get('LAUNCH_LIBRARY_PASSWORD', default=None),
+        'timeout': os.environ.get('LAUNCH_LIBRARY_TIMEOUT', default=10),
+        'verify': os.environ.get('LAUNCH_LIBRARY_VERIFY', default=True),
+        'launch_endpoint': os.environ.get('LAUNCH_LIBRARY_LAUNCH_ENDPOINT', default="/launch/"),
+    }
+}
 
 #  Import Logging Settings
 # -----------------------------------------

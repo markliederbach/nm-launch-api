@@ -13,7 +13,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at http://prodweb4/OnlineOrdering/Product?productID=15701
+Report bugs at https://github.com/markliederbach/nm-launch-catalog/issues
 
 If you are reporting a bug, please include:
 
@@ -43,7 +43,7 @@ sharepoints, and such.
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at http://prodweb4/OnlineOrdering/Product?productID=15701.
+The best way to send feedback is to file an issue at https://github.com/markliederbach/nm-launch-catalog/issues.
 
 If you are proposing a feature:
 
@@ -59,7 +59,7 @@ Ready to contribute? Here's how to set up nm_launch_api for local development.
 
 1. Clone you the project on Gitlab locally::
 
-    $ git clone git@git.ent.tds.net:Some_Group/nm_launch_api.git
+    $ git clone https://github.com/markliederbach/nm-launch-catalog.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
@@ -69,7 +69,7 @@ Ready to contribute? Here's how to set up nm_launch_api for local development.
 
 4. Create a branch for local development::
 
-    $ git checkout -b feature-name-your-branch
+    $ git checkout -b feature/name-your-branch
 
    Now you can make your changes locally.
 
