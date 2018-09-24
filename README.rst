@@ -31,3 +31,20 @@ To Run Locally
     <path to virtualenv>/bin/nm_launch_api
 
 The API is now running on localhost port 8000.
+
+
+To Run Tests
+------------
+
+1. In a virtualenv, run:
+
+.. code-block:: bash
+
+    pip install requirements/ci.txt
+
+2. Simply run the command:
+
+.. code-block:: bash
+
+    python setup.py test
+
