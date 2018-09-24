@@ -1,7 +1,8 @@
 ===============================
 nm_launch_api
 ===============================
-
+.. image:: https://travis-ci.com/markliederbach/nm-launch-catalog.svg?branch=master
+    :target: https://travis-ci.com/markliederbach/nm-launch-catalog
 
 API backend to search launch data to the frontend.
 
