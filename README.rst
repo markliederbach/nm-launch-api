@@ -37,11 +37,11 @@ The API is now running on localhost port 8000.
 To Run Tests
 ------------
 
-1. In a virtualenv, run:
+1. In a virtualenv:
 
 .. code-block:: bash
 
-    pip install requirements/ci.txt
+    pip install -r requirements/ci.txt
 
 2. Simply run the command:
 
