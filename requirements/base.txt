@@ -1,4 +1,6 @@
 Flask==1.0.2
+flask-cors==3.0.6
 marshmallow==2.15.6
 certifi
 requests
+Werkzeug==0.14.1

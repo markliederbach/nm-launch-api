@@ -58,7 +58,7 @@ LOGGING_CONFIG = {
         __name__.split('.')[0]: {
             'handlers': ['standard', 'console', 'email'],
             'level': os.environ.get('LOG_LEVEL', 'INFO')
-        }
+        },
     }
 }
 

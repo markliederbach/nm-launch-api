@@ -6,7 +6,7 @@ import os
 import json
 import unittest
 from unittest import mock
-import collections
+from werkzeug.datastructures import ImmutableMultiDict
 from nm_launch_api import app
 from nm_launch_api.api.v1 import views as v1_views
 from tests.mock_clients import launch_library
@@ -31,9 +31,8 @@ class TestNMLaunchAPIV1(unittest.TestCase):
 
     @staticmethod
     def build_request_args(json_filename):
-        MockRequest = collections.namedtuple("MockRequest", ["args"])
         with open(os.path.join(JSON_DIRECTORY_PATH, json_filename), "r") as f:
-            return MockRequest(json.load(f))
+            return ImmutableMultiDict(json.load(f))
 
     def submit_request(self, request_filename, view=None, **kwargs):
         view = view if view is not None else self.view

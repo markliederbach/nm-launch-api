@@ -27,7 +27,7 @@ CLIENT_SETTINGS = {
         'password': os.environ.get('LAUNCH_LIBRARY_PASSWORD', default=None),
         'timeout': os.environ.get('LAUNCH_LIBRARY_TIMEOUT', default=10),
         'verify': os.environ.get('LAUNCH_LIBRARY_VERIFY', default=True),
-        'launch_endpoint': os.environ.get('LAUNCH_LIBRARY_LAUNCH_ENDPOINT', default="/launch/"),
+        'launch_endpoint': os.environ.get('LAUNCH_LIBRARY_LAUNCH_ENDPOINT', default="/launch"),
     }
 }
 

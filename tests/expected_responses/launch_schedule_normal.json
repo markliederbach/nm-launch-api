@@ -2,6 +2,7 @@
   "data": {
     "launches": [
       {
+        "name": "Ariane 5 ECA | Azerspace-2/Intelsat-38 & Horizons 3e",
         "location": {
           "map_url": "https://www.google.com/maps/?q=5.239,-52.769",
           "name": "Kourou, French Guiana"
@@ -20,6 +21,7 @@
         }
       },
       {
+        "name": "Kuaizhou-1A | Centispace-1 S1",
         "location": {
           "map_url": "http://maps.google.com/maps?q=28.2495,102.0232",
           "name": "Jiuquan, People's Republic of China"

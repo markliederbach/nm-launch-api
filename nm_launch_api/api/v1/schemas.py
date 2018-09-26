@@ -38,6 +38,7 @@ class LocationSchema(Schema):
 
 
 class LaunchInfoSchema(Schema):
+    name = fields.String()
     est_timestamp = fields.Method("get_est_timestamp")
     location = fields.Nested(LocationSchema)
     rocket = fields.Nested(RocketSchema)

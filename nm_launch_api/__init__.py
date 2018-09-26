@@ -3,9 +3,11 @@ __version__ = "0.0.1"
 
 import os
 from flask import Flask
+from flask_cors import CORS
 from nm_launch_api.api.v1 import api as api_v1
 
 app = Flask(__name__)
+CORS(app)
 
 # Get location of settings file to use
 nm_launch_api_settings = os.environ.get(

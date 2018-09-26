@@ -116,7 +116,7 @@ class BaseAPIClient:
             raise self.get_client_exception_class()(
                 str(e), self.requests.codes["bad_request"]
             )
-        if not (200 >= response.status_code < 300):
+        if not (200 >= response.status_code < 300) and not self.no_results(response):
             raise self.get_client_exception_class()(
                 self.get_reason(response), response.status_code
             )
@@ -139,6 +139,11 @@ class BaseAPIClient:
         return response.text
 
     @staticmethod
+    def no_results(response):
+        response_data = response.json()
+        return bool(response.status_code == 404 and not response_data.get("count", -1))
+
+    @staticmethod
     def get_reason(response):
         """
         Get's the reason for not returning a 2** code
@@ -155,8 +160,8 @@ class BaseAPIClient:
             if response_data:
                 if "detail" in response_data:
                     result += ", Detail: {}".format(response_data["detail"])
-                elif "message" in response_data:
-                    result += ", Detail: {}".format(response_data["message"])
+                elif "msg" in response_data:
+                    result += ", Detail: {}".format(response_data["msg"])
                 elif "error" in response_data:
                     result += ", Detail: {}".format(response_data["error"])
                 else:
