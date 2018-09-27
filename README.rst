@@ -1,5 +1,5 @@
 ===============================
-nm_launch_api
+NM Global Launch API
 ===============================
 .. image:: https://travis-ci.com/markliederbach/nm-launch-api.svg?branch=master
     :target: https://travis-ci.com/markliederbach/nm-launch-api
