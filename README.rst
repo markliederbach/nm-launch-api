@@ -4,7 +4,7 @@ NM Global Launch API
 .. image:: https://travis-ci.com/markliederbach/nm-launch-api.svg?branch=master
     :target: https://travis-ci.com/markliederbach/nm-launch-api
 
-API backend to search launch data to the frontend.
+API backend to browse launch data from a public API on the frontend.
 
 
 To Run Locally
